@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.writestar.mapper.ReplyMapper">
+	<resultMap type="com.writestar.domain.UserVO" id="userInfo">
+		<result column="email" property="email"/>
+		<result column="password" property="password"/>
+		<result column="nickname" property="nickname"/>
+		<result column="user_info" property="user_info"/>
+	</resultMap>
+	
+	<resultMap type="com.writestar.domain.ReplyVO" id="replyVo">
+		<result column="rno" property="rno"/>
+		<result column="bno" property="bno"/>
+		<result column="content" property="content"/>
+		<result column="replyDate" property="replyDate"/>
+		<result column="email" property="email"/>
+		<collection property="userVO" resultMap="userInfo"/>
+	</resultMap>
+	
+	<insert id="insertReply">
+		insert
+		into tbl_reply ( rno,
+						 bno, 
+						 content, 
+						 replyDate, 
+						 email ) 
+				values ( SEQ_REPLY.nextval,
+						 #{bno},
+						 #{content},
+						 sysdate,
+						 #{email} )
+	</insert>
+	
+	<select id="readReply" resultType="com.writestar.domain.ReplyVO">
+		select *
+		  from tbl_reply
+		 where rno = #{rno}
+	</select>
+	
+	<delete id="deleteReply">
+		delete
+		  from tbl_reply
+		 where rno = #{rno}
+	</delete>
+	
+	<update id="updateReply">
+		update tbl_reply
+		   set content = #{content}
+		 where rno = #{rno}
+	</update>
+	
+	<select id="getListWithPaging" resultMap="replyVo">
+		<![CDATA[
+			 select  
+			 	x.*
+			 from (
+			 	select rownum as rn, t.*
+			 	from(
+					select a.rno,
+					       a.bno, 
+					       a.content, 
+					       a.replyDate, 
+					       a.email,
+					       b.nickname
+					from tbl_reply a, tbl_user b
+					where a.bno =  #{bno}
+					and a.rno > 0
+					and a.email = b.email
+					order by replyDate asc
+			 	) t
+			   ]]>  
+			   <![CDATA[
+			    where rownum <= #{cri.pageNum} * #{cri.amount}
+			    ) x
+					where x.rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getCountByBno" resultType="int">
+		<![CDATA[
+			select count(rno) from tbl_reply where bno = #{bno}
+		]]>
+	</select>
+	
+	<delete id="deleteAllReply">
+		delete
+		  from tbl_reply
+		 where bno = #{bno}
+	</delete>
+	
+	<!-- 게시물 삭제 시 댓글도 삭제 sql문 -->
+	<delete id="deleteAll">
+		delete tbl_reply where bno = #{bno}
+	</delete>
+</mapper>

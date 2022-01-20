@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.writestar.mapper.BoardMapper"> 
+ 	<resultMap type="com.writestar.domain.UserVO" id="userInfo">
+		<result column="email" property="email"/>
+		<result column="password" property="password"/>
+		<result column="nickname" property="nickname"/>
+		<result column="user_info" property="user_info"/>
+	</resultMap>
+	
+ 	<resultMap type="com.writestar.domain.BoardAttachVO" id="fileInfo">
+		<result column="uuid" property="uuid"/>
+		<result column="fileType" property="fileType"/>
+		<result column="uploadPath" property="uploadPath"/>
+		<result column="fileName" property="fileName"/>
+		<result column="bno" property="bno"/>
+		<result column="email" property="email"/>
+	</resultMap>
+	
+	<resultMap type="com.writestar.domain.BoardVO" id="boardVo">
+		<result column="bno" property="bno"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="regdate" property="regdate"/>
+		<result column="address" property="address"/>
+		<result column="post_type" property="post_type"/>
+		<result column="email" property="email"/>
+		<result column="hits" property="hits"/>
+		<collection property="userVO" resultMap="userInfo"/>
+		<collection property="thumbnail" resultMap="fileInfo"/>
+	</resultMap>
+	
+	<select id="getList" resultType="com.writestar.domain.BoardVO">
+		<![CDATA[
+	 		select * from tbl_board where bno >0
+	 	]]>
+	</select>
+	 
+	<!-- 검색을 위해 동적 sql 처리 -->
+	<select id="getListWithPaging" resultMap="boardVo">
+		<![CDATA[
+		 	select
+             x.*
+          from (
+              select rownum as rn,t.*
+              from(
+               select 
+                         attch.uuid as uuid,
+                     attch.fileType as fileType,
+                     attch.uploadPath as uploadPath,
+                     attch.fileName as fileName,
+                     board.bno as bno,
+                     board.email as email,
+                     board.title as title,
+                     board.content as content,
+                     board.regdate as regdate,
+                     board.address as address,
+                     board.post_type as post_type,
+                     board.hits as hits,
+                     board.nickname as nickname
+                from tbl_attach_file attch
+                    right outer join
+                    (select 
+                            b.bno,
+                            b.title,
+                            b.content,
+                            b.regdate,
+                            b.address,
+                            b.post_type,
+                            b.email,
+                            b.hits,
+                            a.nickname
+                       from tbl_user a, tbl_board b
+                      where a.email = b.email
+                        and b.email = #{email}) board
+                on attch.bno = board.bno
+                    order by regdate desc) t
+              ]]>
+              <![CDATA[
+                 where rownum <= #{pageNum} * #{amount}
+           ) x
+           where x.rn > (#{pageNum}-1) * #{amount}
+	 	]]>
+	 </select>
+	 
+	 <insert id="insertSelectKey">
+	 	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+	 		select seq_board.nextval from dual
+	 	</selectKey>
+	 	insert
+	 	into tbl_board ( bno,
+ 						title,
+ 						content,
+						regdate,
+						address,
+						post_type,
+						email )
+	 	values ( #{bno}, 
+	 			 #{title}, 
+	 			 #{content}, 
+	 			 sysdate, 
+	 			 #{address}, 
+	 			 #{post_type}, 
+	 			 #{email})
+	 </insert>
+	 
+	 <select id="read" resultMap="boardVo">
+	 	select b.bno as bno,
+		       b.title as title,
+		       b.content as content,
+		       b.regdate as regdate,
+		       b.address as address,
+		       b.post_type as post_type,
+		       b.email as email,
+		       b.hits as hits,
+		       a.nickname as nickname,
+		       a.user_info as user_info
+		  from tbl_user a, tbl_board b
+		 where a.email = b.email
+		   and b.bno = #{bno}
+	 </select>
+	 
+	 <delete id="delete">
+	 	delete from tbl_board where bno = #{bno}
+	 </delete>
+	 
+	 <update id="update">
+	 	update tbl_board set title=#{title}, content=#{content}, address=#{address},
+	 	post_type=#{post_type}, email=#{email} where bno = ${bno}
+	 </update>
+	 
+	 <select id="getTotalCount" resultType="int">
+	 	select count(*) from tbl_board 
+	 	where bno >0
+	 	and email = #{email}
+	 </select>
+	 
+	 <update id="updateHitsCnt">
+		update tbl_board
+		   set hits = hits + 1
+		 where bno = #{bno}
+	 </update>
+	 
+	 <select id="selectTop5" resultMap="boardVo">
+		select attch.uuid as uuid,
+		       attch.fileType as fileType,
+		       attch.uploadPath as uploadPath,
+		       attch.fileName as fileName,
+		       board.nickname as nickname,
+		       board.bno as bno,
+		       board.title as title,
+		       board.content as content,
+		       board.regdate as regdate,
+		       board.post_type as post_type,
+		       board.email as email,
+		       board.hits as hits 
+		from tbl_attach_file attch
+		right outer join
+		    (select 
+		           a.nickname,
+		           b.bno,
+		           b.title,
+		           b.content,
+		           b.regdate,
+		           b.post_type,
+		           b.email,
+		           b.hits
+		    from tbl_user a, tbl_board b
+		    where a.email = b.email
+		    and post_type = 1
+		    order by hits desc) board
+		on attch.bno = board.bno
+	 </select>
+	 
+	 <select id="getMainList" resultMap="boardVo">
+		select attch.uuid as uuid,
+               attch.fileType as fileType,
+               attch.uploadPath as uploadPath,
+               attch.fileName as fileName,
+               board.bno as bno,
+               board.email as email,
+               board.title as title,
+               board.content as content,
+               board.regdate as regdate,
+               board.address as address,
+               board.post_type as post_type,
+               board.hits as hits,
+               board.nickname as nickname
+          from tbl_attach_file attch
+               right outer join
+              (select b.bno,
+                      b.title,
+                      b.content,
+                      b.regdate,
+                      b.address,
+                      b.post_type,
+                      b.email,
+                      b.hits,
+                      a.nickname
+                 from tbl_user a, tbl_board b
+                where a.email = b.email
+                  and post_type = 1) board
+         on attch.bno = board.bno
+   		 order by regdate desc
+	 </select>
+ </mapper>

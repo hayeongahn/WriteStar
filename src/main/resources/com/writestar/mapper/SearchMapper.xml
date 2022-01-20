@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.writestar.mapper.SearchMapper">
+ 	<resultMap type="com.writestar.domain.UserVO" id="userInfo">
+		<result column="email" property="email"/>
+		<result column="password" property="password"/>
+		<result column="nickname" property="nickname"/>
+		<result column="user_info" property="user_info"/>
+	</resultMap>
+	
+	<resultMap type="com.writestar.domain.BoardAttachVO" id="fileInfo">
+		<result column="uuid" property="uuid"/>
+		<result column="fileType" property="fileType"/>
+		<result column="uploadPath" property="uploadPath"/>
+		<result column="fileName" property="fileName"/>
+		<result column="bno" property="bno"/>
+		<result column="email" property="email"/>
+	</resultMap>
+	
+	<resultMap type="com.writestar.domain.BoardVO" id="boardVo">
+		<result column="bno" property="bno"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="regdate" property="regdate"/>
+		<result column="address" property="address"/>
+		<result column="post_type" property="post_type"/>
+		<result column="email" property="email"/>
+		<result column="hits" property="hits"/>
+		<collection property="userVO" resultMap="userInfo" />
+		<collection property="thumbnail" resultMap="fileInfo" />
+	</resultMap>
+	
+ 	<!-- 검색을 위해 동적 sql 처리 -->
+	<select id="searchList" resultMap="boardVo">
+		select 
+		    uuid, fileType, uploadPath, fileName, bno, email, title, content, regdate, address, post_type, hits, nickname
+		from (
+		    select
+		        attach.uuid as uuid,
+		        attach.fileType as fileType,
+		        attach.uploadPath as uploadPath,
+		        attach.fileName as fileName,
+		        board.rn as rn,
+		        board.bno as bno,
+		        board.email as email,
+		        board.title as title,
+		        board.content as content,
+		        board.regdate as regdate,
+		        board.address as address,
+		        board.post_type as post_type,
+		        board.hits as hits,
+		        board.nickname as nickname
+		    from
+		        tbl_attach_file attach
+		        right outer join(
+		            select
+		                rownum as rn,
+		                b.bno,
+		                b.title,
+		                b.content,
+		                b.regdate,
+		                b.address,
+		                b.post_type,
+		                b.email,
+		                b.hits,
+		                a.nickname
+		            from
+		                tbl_user a left outer join tbl_board b on (a.email = b.email and post_type = 1)
+		            where
+		                b.title like '%' || #{keyword} || '%'
+		                or b.content like '%' || #{keyword} || '%'
+		        )board
+		        on attach.bno = board.bno
+		)
+	</select>
+	 
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tbl_board 
+	 	 where bno >0
+	</select>
+</mapper>

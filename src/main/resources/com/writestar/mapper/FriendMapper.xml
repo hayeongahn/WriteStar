@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.writestar.mapper.FriendMapper">		
+	<resultMap type="com.writestar.domain.UserVO" id="userInfo">
+		<result column="email" property="email"/>
+		<result column="password" property="password"/>
+		<result column="nickname" property="nickname"/>
+		<result column="user_info" property="user_info"/>
+	</resultMap>
+	
+	
+	<resultMap type="com.writestar.domain.FriendVO" id="friendVo">
+		<result column="user_email" property="user_email"/>
+		<result column="friend_email" property="friend_email"/>
+		<collection property="userVO" resultMap="userInfo" />
+	</resultMap>
+
+	<!-- 친구 목록 조회 -->
+	<select id="selectFriend" parameterType="com.writestar.domain.UserVO" resultMap="userInfo">
+		select A.friend_email as email, B.nickname as nickname, B.user_info as user_info
+		  from tbl_friend A, tbl_user B
+		 where A.user_email = #{to_user}
+		   and A.friend_email = B.email
+	</select>
+
+	<!-- 친구요청 수락 -->
+	<insert id="insertFriend">
+		insert into tbl_friend (user_email, friend_email) values (#{to_user}, #{from_user})
+	</insert>
+	
+	<!-- 친구요청 수락 반전 -->
+	<insert id="reverseInsertFriend">
+		insert into tbl_friend (user_email, friend_email) values (#{from_user}, #{to_user})
+	</insert>
+	
+	<!-- 친구 삭제 -->
+	<delete id="deleteFriend">
+		delete
+		  from tbl_friend
+		 where user_email in (#{user_email}, #{friend_email})
+		   and friend_email in (#{user_email}, #{friend_email})
+	</delete>
+
+	<!-- 친구 여부 확인 -->
+	<select id="checkFriend" resultType="com.writestar.domain.FriendVO">
+		select count(*) as cnt
+		  from tbl_friend
+		 where user_email = #{userId}
+		  and friend_email = #{email}
+	</select>
+</mapper>

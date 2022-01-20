@@ -1,0 +1,254 @@
+/* 헤더 CSS */
+#gnb { display: flex; flex-direction: row; margin-top: 10px; margin-left: 50px;}
+#gnb_right { display: flex; flex-direction: row; margin: 0 0 0 50px;}
+#gnb li {font-size: 16px; padding: 20px; margin-right: 60px;}
+#gnb li a:hover { color: goldenrod; font-weight: bolder;}
+#search {width: 185px; height: 20px; border-radius: 10px; border: 1px solid #333; padding-left: 10px;
+         margin-top: -7px; float: left;}
+#search_icon {width: 35px; height: 25px; font-size: 20px; float: right; margin: -7px 0 0 10px;}
+#join a {display: block; width: 70px; height: 25px; background-color: #000; border-radius: 20px; color: #fff;
+		 text-align:center; font-weight: bolder; margin-top: -10px; line-height: 25px;}
+#login a {display: block; width: 140px; height: 25px; background-color: #000; border-radius: 20px; color: #fff;
+		 text-align:center; font-weight: bolder; margin-top: -10px; line-height: 25px; }
+#logout a {display: block; width: 150px; height: 25px; background-color: #000; border-radius: 20px; color: #fff;
+		 text-align:center; font-weight: bolder; margin-top: -10px; line-height: 25px;}
+#user_update a {display: block; width: 150px; height: 25px; color: #000; text-decoration: underline;
+			    text-align:right; font-weight: bolder; margin-top: -10px; line-height: 25px;
+			    text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+		 
+		 
+
+#logo_wrap {margin: 50px auto; display: flex; flex-direction: row; justify-content: center; }
+#logo {width: 145px; height: 145px; border-radius: 20px; background: #FFFFFF;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); z-index: 99;}
+#logo img {width: 130px; margin: 20px 0 0 2px;}
+
+#footer {width: 100%; height: 110px; border-top: 0.5px solid #ccc; float:left; }
+#footer_con {width: 500px; margin: 10px auto;}
+.footer_logo {width: 135px; margin-right: 120px; filter: grayscale(1); opacity: 0.5; z-index:-1; }
+.copyright {font-size: 18px; color: #333; float: right; margin-top: 50px;}
+
+
+
+#wrapper {width: 1440px; margin: 0 auto;} 
+#profile {float: left; margin: 50px 0 0 107px;
+            width: 235px; height: 505px; float: left;}
+#profile li {float: left; width: 100%; text-align: center;}
+#user_photo img {width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px; object-fit: cover;}
+#nickname a {cursor: pointer;}
+#nickname input {font-size: 20px; font-weight: bolder; margin-bottom: 20px; border: none; text-align: center;}
+#nickname p {font-size: 22px; font-weight: bolder; margin-bottom: 20px; border: none; text-align: center;}
+#user_info input {font-size: 14px; margin-bottom: 20px; border: none; width: 100%;text-align: center;
+                  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+#nickname input:focus {outline:none; cursor: pointer;}
+#user_info input:focus {outline:none;}
+#modi_icon {margin-bottom: 20px; cursor: pointer;}
+#share span {border-right: 1px solid #000; padding-right: 10px;}
+button {width: 210px; height: 60px; background-color: #000; color: #fff; font-size: 24px;
+        font-weight: bolder; border-radius: 20px; cursor: pointer; border: 0px;}
+#new_star {margin-bottom: 15px;}
+
+
+#board {float: right; margin: 50px 120px 0 0; width: 802px;}
+#main h2 {font-size: 24px; font-weight: bolder; margin: 0 0 20px 10px;}
+#con_title input {width: 800px; height: 35px; font-size: 18px; border: 2px solid #c4c4c4;
+                    border-radius: 10px; margin-bottom: 33px;box-sizing: border-box; padding-left: 10px;
+                    }
+#email_hidden input {display: none;}
+#con_text textarea {width: 800px; font-size: 18px; border: 2px solid #c4c4c4;
+                    border-radius: 10px; margin-bottom: 38px; box-sizing: border-box; padding: 10px;}
+#address input {width: 800px; height: 35px; font-size: 18px; border: 2px solid #c4c4c4;
+                    border-radius: 10px; margin-bottom: 25px;box-sizing: border-box; padding-left: 10px;} 
+#attach_title {font-size: 18px; margin-left: 10px; margin-bottom: 15px; font-weight: bolder;}
+
+
+#file_btn { display: block; width: 85px; height: 20px; background-color: #000; color: #fff; border-radius: 10px;
+            cursor: pointer; font-size: 12px; line-height: 20px; float: right; margin-right: 580px; 
+            text-align: center; opacity: 100;}
+
+
+
+#attach {width: 800px; height: 100%; margin-bottom: 54px;}
+#share_title {font-size: 18px; margin-left: 10px; margin-bottom: 10px; font-weight: bolder;}
+#share {font-size: 18px; margin-left: 15px; margin-bottom: 28px;}
+
+#main h3 {font-size: 18px; margin: 0 0 5px 10px;}
+#article_img img {width: 800px; height: 100%; margin-top: 10px; border-radius: 20px;
+                  margin-bottom: 25px;}
+#board_btn {margin-bottom: 50px;}
+
+#reply_btn {margin: 0 0 20px 590px;}
+#reply {position: absolute;}
+#reply_title {margin-left: 20px; font-size: 24px; font-weight: bold; }
+#reply_title hr {width: 540px; position: relative; left: 120px; top: -25px;}
+
+/* 댓글 표시 CSS */
+#chatter {width: 100%; height: 180px; padding:20px;}
+.reply_list {width: 100%; display: inline-flex; flex-direction: row; margin-bottom:15px;}
+.reply_list_con {width: 410px; height: 20px; font-size: 18px; margin-right: 90px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding: 1px}
+.reply_list_nick {width: 145px; font-size: 18px; font-weight: bold; margin-right: 30px;}
+.reply_list_date {width: 100px; font-size: 18px;}
+
+/* 수정 페이지 CSS */
+#article_title input {width: 800px; height: 35px; font-size: 24px; border: 2px solid #c4c4c4;
+                      border-radius: 10px; margin-bottom: 10px; box-sizing: border-box; padding-left: 10px;
+                      font-weight: bolder;}
+#article_date input {width: 800px; height: 18px; font-size: 18px; border: none;
+                     margin-bottom: 5px; font-weight: 100;}
+#article_nickname input {width: 300px; height: 18px; font-size: 18px; border: none;
+                     margin-bottom: 5px; font-weight: 100;}
+#article_img {margin-bottom: 20px;}
+
+/* Get 페이지 CSS */
+#article_title_get input {width: 800px; height: 24px; font-size: 24px; border: none; margin-bottom: 10px; font-weight: bolder;}
+#addReplyBtn {width: 140px; height: 40px; border-radius: 15px; font-size: 21px; margin: 0 0 10px 650px;}
+
+/* Modal CSS */
+.modal {display: none; position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(0,0,0,0.5);}
+.modal-main {width: 1021px; height: 320px; border: 3px solid #000; box-sizing: border-box; border-radius: 20px;
+             background: #fff; position: relative; top: 250px; margin: 0 auto;}
+.reply_nickname {margin: 45px 55px 30px 55px; font-size: 24px; font-weight: bolder;}
+.reply_nickname input {font-size: 24px; font-weight: bolder; border: none;}
+.reply_content input {width: 916px; height: 80px; font-size: 18px;
+                         margin: 0 55px 30px 55px; border: 1px solid #000; box-sizing: border-box; border-radius: 20px;
+                         padding: 10px;}
+.modal-footer {margin-left: 55px;}
+
+             
+/* 리스트 페이지 CSS */
+#board_con {float: right; margin: 50px 120px 0 0; width: 802px;}
+
+.list_img {float: left; position: relative; z-index: 10; margin: 0 50px 50px 0;}
+.list_img img {width: 350px; height: 350px; border-radius:20px; object-fit: cover;}
+.list_img h1 {width: 300px; font-size: 30px; text-align: center; font-weight: bolder; color: #fff;
+              word-break: keep-all; position: absolute; top: 100px; left: 25px;}
+.list_img h2 {width: 350px; font-size: 20px; text-align: center; font-weight: bold; color: #fff;
+               word-break: keep-all; position: absolute; top: 180px; left: 0;}
+.list_img p {width: 350px; font-size: 20px; text-align: center; font-weight: bold; color: #fff;
+               word-break: keep-all; position: absolute; top: 210px; left: 0;}
+.list_img h3 {width: 20px; height: 20px; position: absolute; top: 30px; right: 40px; color: #fff; font-size: 30px;}
+
+/* Paging 부분 CSS */
+.paging {}
+.paging_bar {width:800px; display: inline-flex; flex-direction: row; justify-content: center; margin-bottom: 20px;}
+.paging_bar li {padding: 10px; font-size : 18px;}
+.active {font-weight: bolder; text-decoration: underline; background-color: goldenrod; border-radius: 20px;}
+
+/* user_info change CSS */
+.info_change {border: 1px solid #c4c4c4; border-radius: 5px; background-color: #c4c4c4;}
+
+/* login page CSS */
+#table{width:800px; height:357px; border-collapse: separate; border-spacing: 28px; margin: 0 auto;}
+#email {width:800px; height:70px; border:2px solid #C4C4C4; box-sizing:border-box; border-radius:20px; font-size:24px; padding-left : 10px;}
+#pw{width:800px; height:70px; border:2px solid #C4C4C4; box-sizing:border-box; border-radius:20px; font-size:24px; padding-left : 10px;}
+#cancel, #start {width: 210px; height: 60px; background-color: #000; color: #fff; font-size: 24px; font-weight: bolder; border-radius: 20px;
+				 cursor: pointer;}
+#user_box{width:100%; height:500px; margin: 0 auto;}
+
+/* join page CSS */
+#table_reg {width:800px; height: 400px; margin: 0 auto 50px;}
+#pw_reg, #pw_check {width: 800px; height: 60px; border:2px solid #C4C4C4; box-sizing:border-box; border-radius:20px; 
+                    font-size:24px; padding-left : 10px; margin-bottom: 20px;}
+#email_reg, #nickname_reg {width: 580px; height: 60px; border:2px solid #C4C4C4; box-sizing:border-box; border-radius:20px; 
+                           font-size:24px; padding-left : 10px; margin-bottom: 20px;}
+
+#registration {width: 210px; height: 60px; background-color: #000; color: #fff; font-size: 24px; font-weight: bolder; border-radius: 20px;
+               cursor: pointer; margin: 0 10px 0 200px;}
+               
+/* 슬라이더 CSS */
+#slider { width: 600px; height: 600px; margin: -130px auto; position: relative; overflow: hidden;}
+#slide { width: 3000px; height: 600px; position: absolute; left: 0; }
+
+.slide_img img {width: 600px; height: 600px; border-radius:20px; object-fit: cover;}
+.slide_img {float: left; position: relative; z-index: 10;}
+.slide_img h1 a {width: 550px; font-size: 60px; text-align: center; font-weight: bolder; color: #fff;
+              word-break: keep-all; position: absolute; top: 150px; left: 25px;}
+.slide_img h2 {width: 600px; font-size: 30px; text-align: center; font-weight: bold; color: #fff;
+               word-break: keep-all; position: absolute; top: 300px; left: 0;}
+.slide_img p a {width: 600px; font-size: 30px; text-align: center; font-weight: bold; color: #fff;
+               word-break: keep-all; position: absolute; top: 400px; left: 0;}
+               
+.dotList { position: absolute; text-align: center; left: 50%; bottom: 30px; 
+                   z-index: 999; transform: translateX(-50%); }
+.dotList li { width: 30px; height: 30px; background-color: #ccc; color: #fff;
+                      line-height: 30px; border-radius: 50%; float: left; margin: 0 2px;
+                      transition: .3s;}
+.dotList li.on { background-color: goldenrod; }
+
+#btnBox {float: left; margin: -250px 0 0 200px;}
+#btnBox .prev {font-size: 60px; color: #555; background-color: #fff;}
+#btnBox .next {margin-left: 600px; font-size: 60px; color: #555; background-color: #fff;}  
+
+/* 서비스 소개 CSS */
+#introduction {width: 100%; margin-top: 200px;}
+#introduction_text {display: flex; flex-direction: row;}
+#introduction_text img {height: 300px; margin-left: 70px; }
+#introduction_text p {width: 600px; text-align: center; font-size: 14px; line-height: 25px;
+                      margin: 70px 0 0 100px;}
+hr {width: 1300px; margin: 0 auto;}
+
+/* Main page content CSS */
+#content_title {width: 180px; height: 40px; margin: 50px 0 0 100px; border-radius: 20px; background-color: #000;}
+#content_title p {font-size: 24px; font-weight: bold; color: goldenrod; line-height: 45px; margin-left: 20px;}
+
+#content_wrap {width: 1200px; margin: 0 auto;}
+#content {display: flex; flex-direction: row; flex-wrap: wrap; }
+.content_img { padding:50px;}
+.content_img img {width: 300px; height: 300px; border-radius:20px; object-fit: cover;}
+.content_img h1 {width: 150px; font-weight: bold; float: left; margin: 20px 0 20px 20px;}
+.content_img h2 {width: 100px; text-align:right; float: right; margin: 20px 20px 20px 0;}
+.content_img p {width: 280px; text-align: left; margin-left: 20px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+
+/* search page content CSS */
+#search_wrapper {width:800px; height: 300px; margin: 0 auto;}
+#search_result_page {width: 585px; height: 60px; border:2px solid #C4C4C4; box-sizing:border-box; border-radius:20px; 
+                     font-size:24px; padding-left : 10px; margin-bottom: 20px;}
+#recommand_title {width: 150px; height: 40px; margin-bottom: 10px;}
+#recommand_title p {font-size: 24px; font-weight: bold; color: goldenrod; line-height: 45px; margin-left: 20px;}
+
+#recommand_list {display: flex; flex-direction: row; flex-wrap: wrap;}
+#recommand_list li {height: 20px; border-radius: 20px; background-color: #ccc; padding: 10px 20px; margin: 20px 10px 0 20px;
+					line-height: 20px; color:#777;}
+
+#search_title {width: 190px; height: 40px; margin: 50px 0 0 100px; border-radius: 20px; background-color: #000;}
+#search_title p {font-size: 24px; font-weight: bold; color: goldenrod; line-height: 45px; margin-left: 20px;}
+
+#search_wrap {width: 1200px; margin: 0 auto;}
+#search_list {display: flex; flex-direction: row; flex-wrap: wrap; }
+.search_img { padding:50px;}
+.search_img img {width: 300px; height: 300px; border-radius:20px; object-fit: cover;}
+.search_img h1 {width: 150px; font-weight: bold; float: left; margin: 20px 0 20px 20px;}
+.search_img h2 {width: 100px; text-align:right; float: right; margin: 20px 20px 20px 0;}
+.search_img p {width: 280px; text-align: left; margin-left: 20px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+
+/* user info change CSS */
+#userphoto_reg {width: 150px; float:left; margin-left: 200px; }
+#userphoto_reg p {text-align: center; font-weight: bolder; margin: 0 auto 20px; color: goldenrod;}
+#file_change_btn {width:150px;}
+.cancel_btn {width: 22px; height: 20px; font-size: 12px; margin-top:10px;}
+#image img {width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px; object-fit: cover;}
+#image {float:left;}
+
+
+#table_change {width:800px; height: 400px; margin: 0 100px 50px 0px; float: right;}
+#infochange {width: 210px; height: 60px; background-color: #000; color: #fff; font-size: 24px; font-weight: bolder; border-radius: 20px;
+               cursor: pointer; margin: 0 10px 0 90px; border: 0px;}
+#pwchange {margin-left: 10px; background-color: goldenrod; color: #000;}
+
+/* Other Planet CSS */
+#r_title {width: 350px; height: 40px; margin: 30px; border-radius: 20px; background-color: #000; color: #fff;
+		  font-size: 20px; text-align: center; font-weight: bolder; line-height: 40px;}
+#f_title {width: 350px; height: 40px; margin: 30px; border-radius: 20px; background-color: #fff; color: #000;
+		  font-size: 20px; text-align: center; font-weight: bolder; line-height: 40px; border: 3px solid goldenrod;}
+
+#form {}
+#r_table{width: 1400px; margin: 0 auto 100px;}
+#r_table button {width: 70px; height: 40px; font-size: 18px;}
+.approve {background-color: goldenrod;}
+
+.table_item, .table_item2 {float: left; width: 300px; padding: 20px;}
+.r_nickname {font-size: 20px; font-weight: bolder; margin: 20px 0 5px 0;}
+.r_info {margin: 10px 0 20px 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+td {display: block; text-align: center;}
+.table_item img {width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px; object-fit: cover;}
+.table_item2 img {width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px; object-fit: cover;}
